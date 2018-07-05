@@ -30,7 +30,7 @@ tripListNoDeviation = list()
 tripsNoDeviation = test_for_deviations(tripList)
 
 ### RESULTS (as a list of journeys without deviations)
-print(tripsNoDeviation)
+#print(tripsNoDeviation)
 if len(tripsNoDeviation)==0:
     print("We are sorry, but there are no routes without deviations for you.")
     print("With: "+ tripList[0]['name'])
@@ -42,11 +42,11 @@ else:
     """print("With: "+ tripsNoDeviation[0]['name'])
     print("From: "+ tripsNoDeviation[0]['Origin']['name'])
     print("To: "+ tripsNoDeviation[0]['Destination']['name'])"""
-    print(len(tripsNoDeviation))
+    #print(len(tripsNoDeviation))
     for i in tripsNoDeviation:    
         print("With: "+ i['Product']['name'])
         print("From: "+ i['Origin']['name'])
         print("To: "+ i['Destination']['name'])
-        if i['Origin']['name'] == departure_station:
+        if i['Destination']['name'].lower() == arrival_station.lower():
             break
 # output one random tripsNoDeviation
