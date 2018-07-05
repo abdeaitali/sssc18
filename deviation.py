@@ -1,9 +1,22 @@
 import requests
+
 def get_deviations(key ,transportmode, linenumber, siteid):
+    if transportmode=='BUS':
+        transportcode='bus'
+    elif transportmode=='MET':
+        transportcode='metro'
+    elif transportmode=='TRN':
+        transportcode='train'
+    elif transportmode=='SHP':
+        transportcode='ship'
+    elif transportmode=='TRM':
+        transportcode='tram'
+    else:
+        transportcode=''
     loc_url = 'http://api.sl.se/api2/deviations.json'
     loc_params = {
         'key': key,
-        'transportmode': transportmode,
+        'transportmode': transportcode,
         'linenumber': linenumber,
         'siteid': siteid,
     }
@@ -23,8 +36,40 @@ def find_deviations (transportmode, linenumber, siteid):
     for i in data:
         if 'arbete' in i['Details']:
             array.append(i)
-    return array
+   # return array
+            return True
             
             #print('nothing')
 
-print(find_deviations('','1',''))
+#print(find_deviations('','1',''))
+def get_stopid(searchstring):
+    loc_url = 'http://api.sl.se/api2/typeahead.json'
+    loc_params = {
+        'key': '7408afe257884be1b392fdfe1e1055c3',
+        'searchstring': searchstring,
+    }
+    resp = requests.get(url = loc_url, params = loc_params)
+    if resp:
+        data = resp.json()
+        if data['StatusCode'] == 0:
+            return data['ResponseData'][0]['SiteId']
+        else:
+            raise RuntimeError('Error occured. StatusCode:', data['StatusCode'])
+
+def test_for_deviations (journeys):
+    deviationfree_journeys=[]
+    for tripId in journeys:
+        for legList in [tripId['LegList']['Leg']]:
+            for leg in legList:
+                transportmode = leg['category']
+                s = leg['name'].replace('X', '').split(' ')
+                linenumber = s[2]
+                siteid = get_stopid(leg['Origin']['name'])
+                if transportmode == "WALK":
+                    continue
+                if find_deviations (transportmode, linenumber, siteid):
+                    print("Deviation found")
+                else:
+                    print("No deviation found")
+                    deviationfree_journeys.append(i)
+    return deviationfree_journeys

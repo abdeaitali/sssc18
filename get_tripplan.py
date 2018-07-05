@@ -24,5 +24,5 @@ originId =  9204
 destId = 9509
 key = '704e7ca1e6e248029c86e38ebc0f12a4'
 
-trip_list = get_tripplan(originId, destId, key)
+print(get_tripplan(originId, destId, key))
 
