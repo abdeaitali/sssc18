@@ -13,6 +13,7 @@ def get_deviations(key ,transportmode, linenumber, siteid):
         transportcode='tram'
     else:
         transportcode=''
+    transportcode=''
     loc_url = 'http://api.sl.se/api2/deviations.json'
     loc_params = {
         'key': key,
@@ -61,15 +62,18 @@ def test_for_deviations (journeys):
     for tripId in journeys:
         for legList in [tripId['LegList']['Leg']]:
             for leg in legList:
-                transportmode = leg['category']
+                if 'category' not in leg:
+                   transportmode = "WALK"
+                else:  
+                    transportmode = leg['category']
+                if transportmode == "WALK":
+                    continue
                 s = leg['name'].replace('X', '').split(' ')
                 linenumber = s[2]
                 siteid = get_stopid(leg['Origin']['name'])
-                if transportmode == "WALK":
-                    continue
                 if find_deviations (transportmode, linenumber, siteid):
                     print("Deviation found")
                 else:
-                    print("No deviation found")
-                    deviationfree_journeys.append(i)
+                    deviationfree_journeys.append(leg)
+                    #print("No deviation found")
     return deviationfree_journeys

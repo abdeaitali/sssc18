@@ -13,8 +13,10 @@ KEY_PLANNER = 'b3c091d5ffdf49d2b2bfaea153c905d9'
 KEY_LOCATER = 'cf745532e18d426f8f3a40933f2fbc51'
 
 ### INPUT
+#departure_station = "Tekniska hogskolan"
+#arrival_station = "Odenplan"
 departure_station = "Tekniska hogskolan"
-arrival_station = "Odenplan"
+arrival_station = "Solna Centrum"
 
 
 ### TRIP Planner 4.0
@@ -28,6 +30,23 @@ tripListNoDeviation = list()
 tripsNoDeviation = test_for_deviations(tripList)
 
 ### RESULTS (as a list of journeys without deviations)
-tripsNoDeviation
-
+print(tripsNoDeviation)
+if len(tripsNoDeviation)==0:
+    print("We are sorry, but there are no routes without deviations for you.")
+    print("With: "+ tripList[0]['name'])
+    print("From: "+ tripList[0]['Origin']['name'])
+    print("To: "+ tripList[0]['Destination']['name'])
+else:
+    print("We found a comfortable trip for you!")
+    #for i in tripsNoDeviation:
+    """print("With: "+ tripsNoDeviation[0]['name'])
+    print("From: "+ tripsNoDeviation[0]['Origin']['name'])
+    print("To: "+ tripsNoDeviation[0]['Destination']['name'])"""
+    print(len(tripsNoDeviation))
+    for i in tripsNoDeviation:    
+        print("With: "+ i['Product']['name'])
+        print("From: "+ i['Origin']['name'])
+        print("To: "+ i['Destination']['name'])
+        if i['Origin']['name'] == departure_station:
+            break
 # output one random tripsNoDeviation
