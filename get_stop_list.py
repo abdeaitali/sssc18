@@ -1,3 +1,4 @@
+import requests
 def get_stop_list(originId, destid, key):
     import requests
     loc_url = 'http://api.sl.se/api2/TravelplannerV3/trip.json'
