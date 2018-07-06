@@ -47,9 +47,10 @@ class Application(Frame):
         self.Result = main.main(self.depStation, self.arrStation)
         # show results
         self.text.delete(1.0, END)
-        self.text.insert(INSERT, "Results of the plan from " \
+        self.text.insert(INSERT, self.Result)
+        """self.text.insert(INSERT, "Results of the plan from " \
             + self.depStation + " to " + self.arrStation + " goes here...i\n" \
-            + self.Result)
+            + self.Result)"""
         #self.text.insert(INSERT, main.main(self.depStation, self.arrStation))
 
 # GUI creation

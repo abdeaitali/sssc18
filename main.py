@@ -58,11 +58,11 @@ def main(departure_station, arrival_station):
         #print(len(tripsNoDeviation))
         for i in tripsNoDeviation[0]:
             if i['type']=='WALK':
-                RESULTS.append(str('Transfer from '+i['Origin']['name']+' to '+i['Destination']['name']))
+                RESULTS.append(str('Transfer from '+i['Origin']['name']+' to '+i['Destination']['name']+'\n'))
             else:    
                 RESULTS.append(str("With: "+ i['Product']['name'] + '\n' \
                      + "From: "+ i['Origin']['name']  +  '\n' \
-                     + "To: " + i['Destination']['name']))
+                     + "To: " + i['Destination']['name']+'\n'))
             if i['Destination']['name'].lower() == arrival_station.lower():
                 break
     # output one random tripsNoDeviation
