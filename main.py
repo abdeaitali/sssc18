@@ -66,6 +66,8 @@ def main(departure_station, arrival_station):
                 break
     # output one random tripsNoDeviation
 
-if __name__ == '__main__':
+"""if __name__ == '__main__':
     main(sys.argv[1], sys.argv[2])
+"""
 
+print(main('Tekniska Högskolan','Solna Centrum'))

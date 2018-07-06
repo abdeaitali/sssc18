@@ -30,7 +30,7 @@ def get_deviations(key ,transportmode, linenumber, siteid):
             raise RuntimeError('Error occured. StatusCode:', data['StatusCode'])
 
 def find_deviations (transportmode, linenumber, siteid):
-    data=get_deviations('d12038ad5e5842129dc374e796fe0b08',transportmode,linenumber,siteid)
+    data=get_deviations('2f4c6811df10445bba9846fb1b47688d',transportmode,linenumber,siteid)
     #return data
     array=[]
     
