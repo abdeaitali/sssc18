@@ -1,4 +1,5 @@
 from tkinter import *
+import main
 
 # class definition 
 class Application(Frame):  
@@ -43,11 +44,12 @@ class Application(Frame):
         self.depStation = self.entryFrom.get()
         self.arrStation = self.entryTo.get()
         # call planner + deviation
-        # >>>> call the main module here 
+        # >>>> call the main module here
         # show results
         self.text.delete(1.0, END)
         self.text.insert(INSERT, "Results of the plan from " \
             + self.depStation + " to " + self.arrStation + " goes here...")
+        self.text.insert(INSERT, main.main(self.depStation, self.arrStation))
 
 # GUI creation
 app = Application()
