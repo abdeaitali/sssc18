@@ -8,7 +8,7 @@ from plan import get_siteid # get station id from name
 from plan import get_tripList # get trip ref from pair of station id
 
 from deviation import test_for_deviations
-
+RESULTS = []
 def main(departure_station, arrival_station):
     ## Abdou's key
     KEY_PLANNER = 'b3c091d5ffdf49d2b2bfaea153c905d9'
@@ -32,24 +32,25 @@ def main(departure_station, arrival_station):
     
     ### RESULTS (as a list of journeys without deviations)
     #print(tripsNoDeviation)
+    
     if len(tripsNoDeviation)==0:
-        print("We are sorry, but there are no routes without deviations for you.")
-        print("This route works, but might be a bit crowded:")
+        RESULTS.append("We are sorry, but there are no routes without deviations for you. \n This route works, but might be a bit crowded:\n")
         #print(tripList[0]['LegList']['Leg'])
         for j in tripList[0]['LegList']['Leg']:
             if j['type']=='WALK':
-                print('Transfer from '+j['Origin']['name']+' to '+j['Destination']['name'])
+                RESULTS.append(str('Transfer from '+j['Origin']['name']+' to '+j['Destination']['name'] + '\n'))
             else:    
-                print("With: "+ j['Product']['name'])
-                print("From: "+ j['Origin']['name'])
-                print("To: "+ j['Destination']['name'])
+                RESULTS.append(str("With: " + j['Product']['name'] + '\n' \
+                    +  "From: " + j['Origin']['name']  + '\n' \
+                    +  "To: " + j['Destination']['name'] + '\n'))
             if j['Destination']['name'].lower() == arrival_station.lower():
                 break
             """print("With: "+ j[0]['name'])
             print("From: "+ j[0]['Origin']['name'])
             print("To: "+ j[0]['Destination']['name'])"""
     else:
-        print("We found a comfortable trip for you!")
+        RESULTS.append(str("We found a comfortable trip for you!\n"))
+        #print("We found a comfortable trip for you!")
         #for i in tripsNoDeviation:
         """print("With: "+ tripsNoDeviation[0]['name'])
         print("From: "+ tripsNoDeviation[0]['Origin']['name'])
@@ -57,17 +58,16 @@ def main(departure_station, arrival_station):
         #print(len(tripsNoDeviation))
         for i in tripsNoDeviation[0]:
             if i['type']=='WALK':
-                print('Transfer from '+i['Origin']['name']+' to '+i['Destination']['name'])
+                RESULTS.append(str('Transfer from '+i['Origin']['name']+' to '+i['Destination']['name']))
             else:    
-                print("With: "+ i['Product']['name'])
-                print("From: "+ i['Origin']['name'])
-                print("To: "+ i['Destination']['name'])
+                RESULTS.append(str("With: "+ i['Product']['name'] + '\n' \
+                     + "From: "+ i['Origin']['name']  +  '\n' \
+                     + "To: " + i['Destination']['name']))
             if i['Destination']['name'].lower() == arrival_station.lower():
                 break
     # output one random tripsNoDeviation
+    return(''.join(RESULTS))
 
-"""if __name__ == '__main__':
+if __name__ == '__main__':
     main(sys.argv[1], sys.argv[2])
-"""
 
-print(main('Tekniska Högskolan','Solna Centrum'))
