@@ -33,11 +33,22 @@ tripsNoDeviation = test_for_deviations(tripList)
 #print(tripsNoDeviation)
 if len(tripsNoDeviation)==0:
     print("We are sorry, but there are no routes without deviations for you.")
-    print("With: "+ tripList[0]['name'])
-    print("From: "+ tripList[0]['Origin']['name'])
-    print("To: "+ tripList[0]['Destination']['name'])
+    print("This route works, but might be a bit crowded:")
+    #print(tripList[0]['LegList']['Leg'])
+    for j in tripList[0]['LegList']['Leg']:
+        if j['type']=='WALK':
+            print('Transfer from '+j['Origin']['name']+' to '+j['Destination']['name'])
+        else:    
+            print("With: "+ j['Product']['name'])
+            print("From: "+ j['Origin']['name'])
+            print("To: "+ j['Destination']['name'])
+        if j['Destination']['name'].lower() == arrival_station.lower():
+            break
+        """print("With: "+ j[0]['name'])
+        print("From: "+ j[0]['Origin']['name'])
+        print("To: "+ j[0]['Destination']['name'])"""
 else:
-    print("We found a comfortable trip for you!")
+    print("There were some deviations on the regular route, here is a more comfortable one!")
     #for i in tripsNoDeviation:
     """print("With: "+ tripsNoDeviation[0]['name'])
     print("From: "+ tripsNoDeviation[0]['Origin']['name'])

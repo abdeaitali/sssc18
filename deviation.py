@@ -73,13 +73,13 @@ def test_for_deviations (journeys):
                 linenumber = s[2]
                 siteid = get_stopid(leg['Origin']['name'])
                 if find_deviations (transportmode, linenumber, siteid):
-                    print("Deviation found")
                     legListErrors=legListErrors+1
+                    #print("Deviation found")
                 """else:
                     deviationfree_journeys.append(leg)"""
                     #print("No deviation found")
             if legListErrors<1:
                 deviationfree_journeys.append(legList)
-            else:
-                print("Journey had too many deviations")
+            """else:
+                print("Journey had too many deviations")"""
     return deviationfree_journeys
