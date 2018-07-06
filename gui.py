@@ -4,8 +4,8 @@ import main
 # class definition 
 class Application(Frame):  
     def __init__(self, master=None):
-        Frame.__init__(self, master, height = 700, width = 700)
-        self.master.title('Planner 4.0')
+        Frame.__init__(self, master, height = 700, width = 700, background='orange')
+        self.master.title('ComfyPlanner')
         #self.master.geometry('300x300')
         self.grid()
         self.createButtons()
@@ -14,15 +14,15 @@ class Application(Frame):
 
     def createEntries(self):
         # From entry
-        self.labelFrom = Label(self, text='From')  
+        self.labelFrom = Label(self, text='From:', background='orange')  
         self.labelFrom.grid(column = 0, row = 0, sticky=E)
         self.entryFrom = Entry(self)
-        self.entryFrom.grid(column = 1, columnspan = 3, row = 0)
+        self.entryFrom.grid(column = 1, columnspan = 2, row = 0)
         # To entry
-        self.labelTo = Label(self, text='To')  
+        self.labelTo = Label(self, text='To:', background='orange')  
         self.labelTo.grid(column = 0, row = 1, sticky=E)
         self.entryTo = Entry(self)
-        self.entryTo.grid(column = 1, columnspan = 3, row = 1)
+        self.entryTo.grid(column = 1, columnspan = 2, row = 1)
 
     def createButtons(self):
         # quit button
@@ -47,7 +47,7 @@ class Application(Frame):
         self.Result = main.main(self.depStation, self.arrStation)
         # show results
         self.text.delete(1.0, END)
-        self.text.insert(INSERT, self.Result)
+        self.text.insert(INSERT, self.Result+'\r\n')
         """self.text.insert(INSERT, "Results of the plan from " \
             + self.depStation + " to " + self.arrStation + " goes here...i\n" \
             + self.Result)"""
