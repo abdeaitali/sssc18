@@ -48,7 +48,7 @@ if len(tripsNoDeviation)==0:
         print("From: "+ j[0]['Origin']['name'])
         print("To: "+ j[0]['Destination']['name'])"""
 else:
-    print("There were some deviations on the regular route, here is a more comfortable one!")
+    print("We found a comfortable trip for you!")
     #for i in tripsNoDeviation:
     """print("With: "+ tripsNoDeviation[0]['name'])
     print("From: "+ tripsNoDeviation[0]['Origin']['name'])
