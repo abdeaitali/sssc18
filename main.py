@@ -43,10 +43,13 @@ else:
     print("From: "+ tripsNoDeviation[0]['Origin']['name'])
     print("To: "+ tripsNoDeviation[0]['Destination']['name'])"""
     #print(len(tripsNoDeviation))
-    for i in tripsNoDeviation:    
-        print("With: "+ i['Product']['name'])
-        print("From: "+ i['Origin']['name'])
-        print("To: "+ i['Destination']['name'])
+    for i in tripsNoDeviation[0]:
+        if i['type']=='WALK':
+            print('Transfer from '+i['Origin']['name']+' to '+i['Destination']['name'])
+        else:    
+            print("With: "+ i['Product']['name'])
+            print("From: "+ i['Origin']['name'])
+            print("To: "+ i['Destination']['name'])
         if i['Destination']['name'].lower() == arrival_station.lower():
             break
 # output one random tripsNoDeviation

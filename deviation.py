@@ -61,6 +61,7 @@ def test_for_deviations (journeys):
     deviationfree_journeys=[]
     for tripId in journeys:
         for legList in [tripId['LegList']['Leg']]:
+            legListErrors=0
             for leg in legList:
                 if 'category' not in leg:
                    transportmode = "WALK"
@@ -73,7 +74,12 @@ def test_for_deviations (journeys):
                 siteid = get_stopid(leg['Origin']['name'])
                 if find_deviations (transportmode, linenumber, siteid):
                     print("Deviation found")
-                else:
-                    deviationfree_journeys.append(leg)
+                    legListErrors=legListErrors+1
+                """else:
+                    deviationfree_journeys.append(leg)"""
                     #print("No deviation found")
+            if legListErrors<1:
+                deviationfree_journeys.append(legList)
+            else:
+                print("Journey had too many deviations")
     return deviationfree_journeys
