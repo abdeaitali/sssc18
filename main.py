@@ -8,8 +8,9 @@ from plan import get_siteid # get station id from name
 from plan import get_tripList # get trip ref from pair of station id
 
 from deviation import test_for_deviations
-RESULTS = []
+#RESULTS = []
 def main(departure_station, arrival_station):
+    RESULTS = []
     ## Abdou's key
     KEY_PLANNER = 'b3c091d5ffdf49d2b2bfaea153c905d9'
     KEY_LOCATER = 'cf745532e18d426f8f3a40933f2fbc51'
@@ -34,7 +35,7 @@ def main(departure_station, arrival_station):
     #print(tripsNoDeviation)
     
     if len(tripsNoDeviation)==0:
-        RESULTS.append("We are sorry, but there are no routes without deviations for you. \n This route works, but might be a bit crowded:\n")
+        RESULTS.append("We are sorry, but there are no routes without deviations for you. \nThis route works, but might be a bit crowded:\n")
         #print(tripList[0]['LegList']['Leg'])
         for j in tripList[0]['LegList']['Leg']:
             if j['type']=='WALK':
@@ -69,5 +70,5 @@ def main(departure_station, arrival_station):
     return(''.join(RESULTS))
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2])
+    main()
 
