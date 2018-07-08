@@ -70,7 +70,10 @@ def test_for_deviations (journeys):
                 if transportmode == "WALK":
                     continue
                 s = leg['name'].replace('X', '').split(' ')
-                linenumber = s[2]
+                if len(s)>2:
+                    linenumber = s[2]
+                else:
+                    linenumber=''
                 siteid = get_stopid(leg['Origin']['name'])
                 if find_deviations (transportmode, linenumber, siteid):
                     legListErrors=legListErrors+1
